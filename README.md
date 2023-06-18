@@ -1,4 +1,6 @@
-# State-of-the-Art-in-AAC-A-Systematic-Review-and-Taxonomy
+# AAC Visualisation
+
+A study of relationships between input data, output modalities, and research methods in the design and development of AAC devices.
 
 Public csv dataset and codebook of 562 articles identified in the ACM DL and SCOPUS databases. 
 
