@@ -5,15 +5,21 @@ import data from '../Data.csv'
 function Heatmap() {
   useEffect(() => {
     getChartData();
+    console.log(getDatasetSize());
   }, []);
 
   async function getChartData() {
     const CSVdata = await csv(data)
-    console.log(CSVdata)
+    return CSVdata;
+  }
+
+  async function getDatasetSize() {
+    const CSVData = await csv(data);
+    return Object.keys(CSVData).length - 1;
   }
 
   return (
-    <div>Heatmap</div>
+    <div id='heatmap'>Heatmap</div>
   )
 }
 
