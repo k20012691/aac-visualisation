@@ -160,8 +160,8 @@ function App() {
                 </Col>
                 <Col xs="4">
                 <Container style={{ 
-                    'boxShadow': '0px 4.5px 50.75px 0px rgba(0, 0, 0, 0.25)', 
-                    'borderRadius': '20px',
+                    boxShadow: '0px 4.5px 50.75px 0px rgba(0, 0, 0, 0.25)', 
+                    borderRadius: '20px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -173,45 +173,28 @@ function App() {
                   </Container>
                 </Col>
               </Row>
-              <Row></Row>
-              <Row></Row>
-              {/* <Row className='flex-grow-1' style={{ height: '24rem' }}>
-                <Col xs="9">
-                  <VisualisationContainer title="Attribute-Community Frequency Mapping" text="Hello">
-                    <Heatmap />
-                  </VisualisationContainer>
-                </Col>
-                <Col xs="3">
-                  <VisualisationContainer title="Composition">
-                    <SpiderChart id='1' />
-                  </VisualisationContainer>
-                </Col>
-              </Row>
-              <Row className='flex-grow-1' style={{ height: '8rem', marginTop: '1rem' }}>
-                <Col xs="12" style={{ alignItems: 'center' }}>
-                  <VisualisationContainer>
-                    <div 
-                      style={{ 
-                        display: 'flex', 
-                        flexDirection: 'row' ,
-                        alignItems: 'center',
-                        justifyContent: 'space-around'
-                    }}>
-                    <QuantMetric title="Total Papers" value={datasetSize} />
+              <Row>
+                  <Col xs="12">
+                  <Container 
+                style={{ 
+                    boxShadow: '0px 4.5px 50.75px 0px rgba(0, 0, 0, 0.25)', 
+                    borderRadius: '20px',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-around',
+                    padding: '1rem',
+                    marginTop: '1rem'
+                  }}>
+                  <QuantMetric title="Total Papers" value={datasetSize} />
                     <QuantMetric title="Communities" value={communitySize} />
                     <QuantMetric title="Scalar Attributes" value={attributeSize} />
                     <QuantMetric title="User Study Methods" value={methodSize} />
                     <QuantMetric title="Output Modalities" value={outputSize} />
-                    </div>
-                  </VisualisationContainer>
-                </Col>
+              </Container>
+                  </Col>
               </Row>
-              <Row className='flex-grow-1' style={{ height: '10rem', marginTop: '1rem' }}>
-                <Col xs="12">
-                  <VisualisationContainer />
-                </Col>
-              </Row> */}
-
+              <Row></Row>
             </Container>
           </div>
         </Col>
