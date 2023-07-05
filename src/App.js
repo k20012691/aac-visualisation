@@ -13,8 +13,20 @@ import SpiderChart from './components/SpiderChart';
 import '/node_modules/react-grid-layout/css/styles.css'
 import '/node_modules/react-resizable/css/styles.css'
 import ReactGridLayout from 'react-grid-layout';
+import PaperListView from './components/PaperListView';
+import { csvParseRows } from 'd3-dsv';
+
+import { ReactComponent as Camera } from './components/icons/camera.svg'
+import { ReactComponent as Contextual } from './components/icons/contextual.svg'
+import { ReactComponent as Gestural } from './components/icons/gestural.svg'
+import { ReactComponent as Mechanical } from './components/icons/mechanical.svg'
+import { ReactComponent as Oriental } from './components/icons/oriental.svg'
+import { ReactComponent as Tactile } from './components/icons/tactile.svg'
+import { ReactComponent as Verbal } from './components/icons/verbal.svg'
 
 function App() {
+  const [database, setDatabase] = useState([]);
+
   const [datasetSize, setDatasetSize] = useState(0);
   const [attributeSize, setAttributeSize] = useState(0);
   const [communitySize, setCommunitySize] = useState(0);
@@ -53,7 +65,8 @@ function App() {
 
   async function getQuantMetrics() {
     const CSVdata = await csv(data);
-    setDatasetSize(Object.keys(CSVdata).length - 1);
+    setDatasetSize(Object.keys(CSVdata).length - 1); 
+    setDatabase(CSVdata);
 
     const morphableCol = CSVdata.map(row => row[morphable]);
     const customisableCol = CSVdata.map(row => row[customisability]);
@@ -77,7 +90,7 @@ function App() {
     const attributeCols = [
         morphableCol, customisableCol, automaticityCol, expressivityCol, adaptiveCol,
         practicalityCol, combinedCol, parallelCol
-      ]
+    ]
 
     const communityCols = [
       BVICol, DHHCol, motorCol, autismCol, IDDCol, cognitiveCol,
@@ -132,6 +145,70 @@ function App() {
     return count;
   }
 
+  function authorCount(authors) {
+    const authorList = authors.split(', ');
+    const authorCount = authorList.length;
+
+    if (authorCount >= 3) {
+      const lastName = authorList[0].split(' ')[0]
+      const formattedAuthors = `${lastName} et al.`;
+      return formattedAuthors;
+    }
+
+    return authors;
+  }
+
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+  
+
+  function getIcons(paper) {
+    let iconArr = []
+    for (const key in paper) {
+      if (key.startsWith("RQ1 - Interaction Input")) {
+        const value = paper[key];
+        if (value === "1") {
+          const attributeName = key.replace("RQ1 - Interaction Input - ", "");
+          iconArr.push(attributeName);
+        }
+      }
+    }
+    
+    if (iconArr.length > 2) {
+      shuffle(iconArr);
+      iconArr = iconArr.slice(0, 2);
+    }
+
+    const iconComponents = iconArr.map(attr => {
+      switch (attr) {
+        case 'Camera ':
+          return <Camera />;
+        case 'Contextual':
+          return <Contextual />;
+        case 'Gestural':
+          return <Gestural />;
+        case 'Mechanical':
+          return <Mechanical />;
+        case 'Oriental':
+          return <Oriental />;
+        case 'Tactile':
+          return <Tactile />;
+        case 'Verbal':
+          return <Verbal />;
+        default:
+          return null;
+      }
+    })
+    
+    return iconComponents;
+  }
+
+  console.log(getIcons(database[5]))
+
   return (
     <div className="App">
       <Container fluid className="d-flex flex-column h-100">
@@ -176,25 +253,55 @@ function App() {
               <Row>
                   <Col xs="12">
                   <Container 
+                    style={{ 
+                        boxShadow: '0px 4.5px 50.75px 0px rgba(0, 0, 0, 0.25)', 
+                        borderRadius: '20px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-around',
+                        padding: '1rem',
+                        marginTop: '1rem'
+                  }}>
+                  <QuantMetric title="Total Papers" value={datasetSize} />
+                  <QuantMetric title="Communities" value={communitySize} />
+                  <QuantMetric title="Scalar Attributes" value={attributeSize} />
+                  <QuantMetric title="User Study Methods" value={methodSize} />
+                  <QuantMetric title="Output Modalities" value={outputSize} />
+              </Container>
+                  </Col>
+              </Row>
+              <Row>
+                  <Col xs="12">
+                  <Container 
                 style={{ 
                     boxShadow: '0px 4.5px 50.75px 0px rgba(0, 0, 0, 0.25)', 
                     borderRadius: '20px',
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'space-around',
                     padding: '1rem',
-                    marginTop: '1rem'
+                    marginTop: '2rem'
                   }}>
-                  <QuantMetric title="Total Papers" value={datasetSize} />
-                    <QuantMetric title="Communities" value={communitySize} />
-                    <QuantMetric title="Scalar Attributes" value={attributeSize} />
-                    <QuantMetric title="User Study Methods" value={methodSize} />
-                    <QuantMetric title="Output Modalities" value={outputSize} />
+                  <div className='container-heading' style={{ marginBottom: '1rem' }}>Academic Research Papers</div>
+                  <ul>
+                    {database.map((paper, index) => (
+                      <li key={index}>
+                        <PaperListView 
+                          id={index + 1} 
+                          title={paper['Title'].substring(0,38) + '...'} 
+                          icon={getIcons(paper)}
+                          authors={authorCount(paper['Authors'])} 
+                          year={paper['Year']} 
+                          link={paper['Link']}
+                        />
+                      </li>
+                    ))}
+                  </ul>
               </Container>
                   </Col>
               </Row>
-              <Row></Row>
             </Container>
           </div>
         </Col>
