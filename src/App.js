@@ -35,6 +35,8 @@ function App() {
 
   const [attributeList, setAttributeList] = useState([]);
   const [communityList, setCommunityList] = useState([]);
+  const [inputList, setInputList] = useState([]);
+  const [outputList, setOutputList] = useState([]);
 
   const morphable = 'RQ1 - Scalar attributes - Morphable ';
   const customisability = 'RQ1 - Scalar attributes - Customisability';
@@ -116,8 +118,14 @@ function App() {
 
     const outputs = CSVdata.columns.filter(output =>
         output.startsWith('RQ1 - Output modality')
-    ).length
-    setOutputSize(outputs);
+    ).map(output => output.slice(24))
+    setOutputList(outputs)
+    setOutputSize(outputs.length);
+
+    const inputs = CSVdata.columns.filter(input => 
+        input.startsWith('RQ1 - Interaction Input')
+    ).map(input => input.slice(26))
+    setInputList(inputs);
 
     const attributeCounts = [];
     const communityCounts = [];
@@ -207,15 +215,13 @@ function App() {
     return iconComponents;
   }
 
-  console.log(getIcons(database[5]))
-
   return (
     <div className="App">
       <Container fluid className="d-flex flex-column h-100">
       <Row className="flex-grow-1">
         <Col xs="3" className="p-0">
           <div className="h-100 d-flex flex-column">
-            <SideMenu />
+            <SideMenu input={inputList} output={outputList} communities={communityList} />
           </div>
         </Col>
         <Col xs="9" className='p-0'>

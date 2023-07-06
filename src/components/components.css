@@ -65,3 +65,22 @@
     margin-left: 0.7rem;
     padding: 0.2rem 0 0.2rem 0;
 }
+
+.filter-title {
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Work Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1rem;
+}
+
+.dropdowns {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
