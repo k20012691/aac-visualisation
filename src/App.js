@@ -3,18 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'reactstrap';
 import SideMenu from './components/SideMenu';
 import Nav from './components/Navbar';
-import VisualisationContainer from './components/VisualisationContainer';
 import Heatmap from './components/Heatmap';
 import { csv } from 'd3-fetch';
 import QuantMetric from './components/QuantMetric';
 import data from './Data.csv';
 import { useState, useEffect } from 'react';
 import SpiderChart from './components/SpiderChart';
-import '/node_modules/react-grid-layout/css/styles.css'
-import '/node_modules/react-resizable/css/styles.css'
-import ReactGridLayout from 'react-grid-layout';
 import PaperListView from './components/PaperListView';
-import { csvParseRows } from 'd3-dsv';
 
 import { ReactComponent as Camera } from './components/icons/camera.svg'
 import { ReactComponent as Contextual } from './components/icons/contextual.svg'

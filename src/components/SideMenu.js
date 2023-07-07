@@ -49,6 +49,7 @@ function SideMenu(props) {
           onFilterChange={handleFilterChange.bind(null, 'outputs')}
         />
       </div>
+      <div className='filter-title'>SORT BY</div>
     </Container>
   );
 }

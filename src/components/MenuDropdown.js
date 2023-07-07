@@ -16,11 +16,11 @@ function MenuDropdown(props) {
       : selectedFilters.filter((filter) => filter !== value);
     onFilterChange(updatedFilters);
   };
-  
+
   useEffect(() => {
     const initialFilters = data;
     onFilterChange(initialFilters);
-  }, []);
+  }, [data]);
 
   return (
     <div>
@@ -47,3 +47,5 @@ function MenuDropdown(props) {
 }
 
 export default MenuDropdown;
+
+
