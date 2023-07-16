@@ -25,7 +25,7 @@ function MenuDropdown(props) {
   return (
     <div>
       <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-        <DropdownToggle caret>{name}</DropdownToggle>
+        <DropdownToggle caret tag='span' data-toggle='dropdown'>{name}</DropdownToggle>
         <DropdownMenu>
           {data.map((option) => (
             <DropdownItem key={option}>

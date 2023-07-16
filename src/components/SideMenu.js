@@ -4,23 +4,24 @@ import './components.css';
 import MenuDropdown from './MenuDropdown';
 
 function SideMenu(props) {
+  const { onFilterChange } = props;
+
   const [selectedFilters, setSelectedFilters] = useState({
     inputs: [],
     outputs: [],
     communities: []
   });
 
-  const handleFilterChange = useCallback((category, filters) => {
+  const handleFilterChange = (category, filters) => {
     setSelectedFilters((prevState) => ({
       ...prevState,
       [category]: filters,
     }));
-  }, []);
+  };
 
   useEffect(() => {
-    console.log(selectedFilters);
-  }, [selectedFilters]);
-  
+    onFilterChange(selectedFilters);
+  }, [selectedFilters, onFilterChange]);
 
   return (
     <Container fluid className="d-flex flex-column h-100" style={{ backgroundColor: '#f5f5f5', padding: '1rem' }}>

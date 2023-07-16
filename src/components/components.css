@@ -1,3 +1,7 @@
+.heatmap-rect {
+    border-radius: 5px;
+}
+
 .heading {
     font-family: 'Work Sans', sans-serif;
     font-weight: 500;
@@ -84,3 +88,11 @@
     align-items: flex-start;
     flex-direction: column;
 }
+
+.label-container {
+    font-size: 10px;
+    font-family: 'Work Sans';
+    font-weight: 400;
+    text-align: left;
+}
+  

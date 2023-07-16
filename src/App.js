@@ -55,6 +55,15 @@ function App() {
   const [attributeCounts, setAttributeCounts] = useState([]);
   const [communityCounts, setCommunityCounts] = useState([]);
 
+  const [selectedFilters, setSelectedFilters] = useState({
+    inputs: [],
+    outputs: [],
+    communities: []
+  });
+  
+  const handleFilterChange = (filters) => {
+    setSelectedFilters(filters);
+  };
 
   useEffect(() => {
     getQuantMetrics();
@@ -62,8 +71,35 @@ function App() {
 
   async function getQuantMetrics() {
     const CSVdata = await csv(data);
-    setDatasetSize(Object.keys(CSVdata).length - 1); 
-    setDatabase(CSVdata);
+    setDatasetSize(Object.keys(CSVdata).length - 1);
+
+  const filteredData = CSVdata.filter((paper) => {
+    const inputFilters = selectedFilters.inputs;
+    const outputFilters = selectedFilters.outputs;
+    const communityFilters = selectedFilters.communities;
+
+    const isInInput = inputFilters.length === 0 || inputFilters.some(filter =>
+      Object.keys(paper).some(key => {
+        return key.includes('RQ1 - Interaction Input') && paper[key] === '1';
+      })
+    );
+
+    const isInOutput = outputFilters.length === 0 || outputFilters.some(filter =>
+      Object.keys(paper).some(key =>
+        key.includes('RQ1 - Output modality') && paper[key] === '1'
+      )
+    );
+
+    const isInCommunity = communityFilters.length === 0 || communityFilters.some(filter =>
+      Object.keys(paper).some(key =>
+        key.includes('RQ3 - Community of Focus') && paper[key] === '1'
+      )
+    );
+
+    return isInInput && isInOutput && isInCommunity;
+  });
+
+  setDatabase(filteredData);
 
     const morphableCol = CSVdata.map(row => row[morphable]);
     const customisableCol = CSVdata.map(row => row[customisability]);
@@ -216,7 +252,12 @@ function App() {
       <Row className="flex-grow-1">
         <Col xs="3" className="p-0">
           <div className="h-100 d-flex flex-column">
-            <SideMenu input={inputList} output={outputList} communities={communityList} />
+            <SideMenu
+              input={inputList} 
+              output={outputList} 
+              communities={communityList}
+              selectedFilters={selectedFilters}
+              onFilterChange={handleFilterChange} />
           </div>
         </Col>
         <Col xs="9" className='p-0'>
@@ -234,6 +275,7 @@ function App() {
                     justifyContent: 'flex-start'
                   }}>
                     <div className='container-heading'>Attribute-Community Frequency Mapping</div>
+                    <Heatmap data={database} attributes={attributeList} communities={communityList} />
                   </Container>
                 </Col>
                 <Col xs="4">
@@ -283,7 +325,7 @@ function App() {
                     alignItems: 'center',
                     justifyContent: 'space-around',
                     padding: '1rem',
-                    marginTop: '2rem'
+                    marginTop: '2rem',
                   }}>
                   <div className='container-heading' style={{ marginBottom: '1rem' }}>Academic Research Papers</div>
                   <ul>
