@@ -1,6 +1,11 @@
 .heatmap-rect {
     border-radius: 5px;
+    transition: fill 0.15s ease-in-out;
 }
+
+.heatmap-rect:hover {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
 
 .heading {
     font-family: 'Work Sans', sans-serif;
