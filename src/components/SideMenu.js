@@ -51,6 +51,10 @@ function SideMenu(props) {
         />
       </div>
       <div className='filter-title'>SORT BY</div>
+      <div className='dropdowns'>
+        <span>Year of Publication</span>
+        <span>Author Name</span>
+      </div>
     </Container>
   );
 }

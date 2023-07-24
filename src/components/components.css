@@ -92,6 +92,7 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    font-family: 'Work Sans';
 }
 
 .label-container {

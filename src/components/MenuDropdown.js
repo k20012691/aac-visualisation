@@ -24,7 +24,7 @@ function MenuDropdown(props) {
 
   return (
     <div>
-      <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+      <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown} style={{ fontFamily: 'Work Sans' }}>
         <DropdownToggle caret tag='span' data-toggle='dropdown'>{name}</DropdownToggle>
         <DropdownMenu>
           {data.map((option) => (
@@ -35,6 +35,7 @@ function MenuDropdown(props) {
                   value={option}
                   checked={selectedFilters.includes(option)}
                   onChange={handleFilterChange}
+                  style={{ fontWeight: 400 }}
                 />
                 {option}
               </Label>
