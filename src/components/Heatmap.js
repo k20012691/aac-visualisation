@@ -112,6 +112,7 @@ function Heatmap(props) {
           .attr('y', yScale(d.srcElement.__data__.community) + yScale.bandwidth() / 2)
           .attr('text-anchor', 'middle')
           .attr('dominant-baseline', 'middle')
+          .style('cursor', 'default')
           .style('font-size', '14px')
           .style('fill', '#fff')
           .style('font-family', 'Work Sans')
