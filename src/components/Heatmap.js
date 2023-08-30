@@ -23,8 +23,8 @@ function Heatmap(props) {
         }
         initialDatabase.forEach((paper) => {
           if (
-            paper[`RQ1 - Scalar attributes - ${attr}`] == 1 &&
-            paper[`RQ3 - Community of Focus  - ${comm}`] == 1
+            paper[`RQ1 - Scalar attributes - ${attr}`] === '1' &&
+            paper[`RQ3 - Community of Focus  - ${comm}`] === '1'
           ) {
             counts[comm][attr]++;
           }
