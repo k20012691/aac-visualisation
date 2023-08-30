@@ -1,0 +1,87 @@
+.MuiContainer-root {
+    border: #8089AC 1px solid;
+    padding: 2rem;
+    border-radius: 5px;
+    font-family: 'Inter';
+    height: 100%;
+}
+
+foreignObject.community-label {
+    width: 30px;
+}
+
+.MuiContainer-root.MuiContainer-maxWidthLg {
+    max-width: 100%;
+}
+
+header.MuiAppBar-root {
+    background-color: #f2f2f2;
+    box-shadow: none;
+}
+
+.MuiToolbar-root {
+    justify-content: space-between;
+}
+
+.scaled-svg {
+    transform: scale(0.7);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#title {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+#para {
+    font-size: 15px;
+    color: #535353;
+}
+
+.icons:hover {
+    filter: brightness(0.8);
+    transition: ease-in-out 0.2s;
+}
+
+.linked {
+    font-weight: 500;
+    color: royalblue;
+    background-color: #f2f2f2;
+    height: 15px;
+    line-height: 15px;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 2px;
+    font-size: 13px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+#borderless {
+    border: none;
+    font-size: 15px;
+    padding: 0;
+}
+
+.label-container {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.metric-title {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+.metric {
+    font-size: 25px;
+    font-weight: 500;
+}
